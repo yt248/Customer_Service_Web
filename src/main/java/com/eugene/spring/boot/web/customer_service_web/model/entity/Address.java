@@ -40,6 +40,17 @@ public class Address {
         this.houseNumber = houseNumber;
     }
 
+
+    public void addCustomerToAddress(Customer customer){
+        customer.setAddress(this);
+        customerList.add(customer);
+    }
+
+    public void deleteCustomerToAddress(Customer customer){
+        customerList.remove(customer);
+    }
+
+
     public int getId() {
         return id;
     }
