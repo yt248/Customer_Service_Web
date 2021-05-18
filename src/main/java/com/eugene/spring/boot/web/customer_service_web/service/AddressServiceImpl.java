@@ -46,10 +46,14 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public void updateAddress(int id, Address updateAddress) {
-        if(addressRepository.existsById(id)){
-            updateAddress.setId(id);
-            addressRepository.save(updateAddress);
-        }
+//        if(addressRepository.existsById(id)){
+//            updateAddress.setId(id);
+//            addressRepository.save(updateAddress);
+//        }
+        Address address = addressRepository.getOne(id);
+        address.setCityName(updateAddress.getCityName());
+        address.setStreetName(updateAddress.getStreetName());
+        address.setHouseNumber(updateAddress.getHouseNumber());
     }
 
     @Override

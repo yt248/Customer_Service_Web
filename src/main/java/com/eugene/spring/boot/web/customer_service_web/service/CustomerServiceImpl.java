@@ -41,10 +41,17 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void updateCustomer(int id, Customer updateCustomer) {
-        if (customerRepository.existsById(id)) {
-            updateCustomer.setId(id);
-            customerRepository.save(updateCustomer);
-        }
+//        if (customerRepository.existsById(id)) {
+//            updateCustomer.setId(id);
+//            customerRepository.save(updateCustomer);
+//        }
+        Customer customer = customerRepository.getOne(id);
+        customer.setName(updateCustomer.getName());
+        customer.setSurName(updateCustomer.getSurName());
+        customer.setAge(updateCustomer.getAge());
+        customer.setGender(updateCustomer.getGender());
+        customer.setAddress(updateCustomer.getAddress());
+
     }
 
     @Override
