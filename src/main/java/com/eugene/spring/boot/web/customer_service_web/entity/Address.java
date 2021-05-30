@@ -1,22 +1,33 @@
-package com.eugene.spring.boot.web.customer_service_web.model.dto;
+package com.eugene.spring.boot.web.customer_service_web.entity;
 
-import com.eugene.spring.boot.web.customer_service_web.model.entity.Customer;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
 
-public class AddressDto {
+@Entity
+@Table(name = "addresses")
+public class Address {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    private String cityName;
-    private String streetName;
-    private String houseNumber;
-    private List<Customer> customerDtoList = new ArrayList<>();
 
-    public AddressDto() {
+    @Column(name = "city_name")
+    private String cityName;
+
+    @Column(name = "street_name")
+    private String streetName;
+
+    @Column(name = "house_number")
+    private String houseNumber;
+
+//    @OneToOne(mappedBy = "address")
+//    private Customer customer;
+
+    public Address() {
     }
 
-    public AddressDto(String cityName, String streetName, String houseNumber) {
+    public Address(String cityName, String streetName, String houseNumber) {
         this.cityName = cityName;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
@@ -54,11 +65,4 @@ public class AddressDto {
         this.houseNumber = houseNumber;
     }
 
-    public List<Customer> getCustomerDtoList() {
-        return customerDtoList;
-    }
-
-    public void setCustomerDtoList(List<Customer> customerDtoList) {
-        this.customerDtoList = customerDtoList;
-    }
 }

@@ -1,6 +1,4 @@
-package com.eugene.spring.boot.web.customer_service_web.model.dto;
-
-import com.eugene.spring.boot.web.customer_service_web.model.entity.Address;
+package com.eugene.spring.boot.web.customer_service_web.dto;
 
 public class CustomerDto {
 
@@ -8,17 +6,17 @@ public class CustomerDto {
     private String name;
     private String surName;
     private int age;
-    private String gender;
-    private Address address;
+
+    private AddressDto addressDto;
+
 
     public CustomerDto() {
     }
 
-    public CustomerDto(String name, String surName, int age, String gender) {
+    public CustomerDto(String name, String surName, int age) {
         this.name = name;
         this.surName = surName;
         this.age = age;
-        this.gender = gender;
     }
 
     public int getId() {
@@ -53,19 +51,11 @@ public class CustomerDto {
         this.age = age;
     }
 
-    public String getGender() {
-        return gender;
+    public AddressDto getAddressDto() {
+        return addressDto;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressDto(AddressDto addressDto) {
+        this.addressDto = addressDto;
     }
 }

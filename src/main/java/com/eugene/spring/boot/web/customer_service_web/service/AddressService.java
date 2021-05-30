@@ -1,7 +1,7 @@
 package com.eugene.spring.boot.web.customer_service_web.service;
 
 
-import com.eugene.spring.boot.web.customer_service_web.model.entity.Address;
+import com.eugene.spring.boot.web.customer_service_web.entity.Address;
 
 import java.util.List;
 
@@ -33,5 +33,9 @@ public interface AddressService {
      * @param id адреса для удаления
      */
     void deleteAddress(int id);
+
+    int findByAddress(String cityName, String streetName, String houseNumber);
+
+    Address findAddressByCityNameAndStreetNameAndHouseNumber(String cityName, String streetName, String houseNumber);
 
 }

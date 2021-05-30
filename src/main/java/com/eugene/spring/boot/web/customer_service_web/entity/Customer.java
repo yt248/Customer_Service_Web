@@ -1,4 +1,4 @@
-package com.eugene.spring.boot.web.customer_service_web.model.entity;
+package com.eugene.spring.boot.web.customer_service_web.entity;
 
 import javax.persistence.*;
 
@@ -8,7 +8,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "customer_name")
@@ -20,21 +20,19 @@ public class Customer {
     @Column(name = "customer_age")
     private int age;
 
-    @Column(name = "customer_gender")
-    private String gender;
-
-    @ManyToOne
-    @JoinColumn(name = "id_address")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "customer_address",
+            joinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "address_id", referencedColumnName = "id")})
     private Address address;
 
     public Customer() {
     }
 
-    public Customer(String name, String surName, int age, String gender) {
+    public Customer(String name, String surName, int age) {
         this.name = name;
         this.surName = surName;
         this.age = age;
-        this.gender = gender;
     }
 
     public int getId() {
@@ -67,14 +65,6 @@ public class Customer {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public Address getAddress() {

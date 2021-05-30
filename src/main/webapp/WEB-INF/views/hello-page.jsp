@@ -2,14 +2,14 @@
 <html>
 <body>
 
-${hello}
-<br>
-<br>
-<a href="/customer/">Go Customer</a>
-<br>
-<br>
-<a href="/address/">Go Address</a>
+<h2>${hello}<h2/>
 
+    <br>
+    <br>
+    <a href="/customers/">Go Customer</a>
+    <br>
+    <br>
+    <a href="/addresses/">Go Address</a>
 
 
 </body>

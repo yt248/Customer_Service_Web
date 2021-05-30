@@ -1,6 +1,6 @@
 package com.eugene.spring.boot.web.customer_service_web.service;
 
-import com.eugene.spring.boot.web.customer_service_web.model.entity.Address;
+import com.eugene.spring.boot.web.customer_service_web.entity.Address;
 import com.eugene.spring.boot.web.customer_service_web.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +61,17 @@ public class AddressServiceImpl implements AddressService {
     public void deleteAddress(int id) {
         Address address = getAddressById(id);
         addressRepository.delete(address);
+    }
+
+
+    @Override
+    public int findByAddress(String cityName, String streetName, String houseNumber) {
+        return addressRepository.findByAddress(cityName, streetName, houseNumber);
+    }
+
+    @Override
+    public Address findAddressByCityNameAndStreetNameAndHouseNumber(String cityName, String streetName, String houseNumber) {
+        return addressRepository.findAddressByCityNameAndStreetNameAndHouseNumber(cityName, streetName, houseNumber);
     }
 
 
