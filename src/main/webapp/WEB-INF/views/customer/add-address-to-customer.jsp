@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h2>Добавление нового клиента</h2>
+<h2>Добавление адреса клиенту</h2>
 <form:form action="saveAddressToCustomer" method="post" modelAttribute="addressDto">
     <table>
         <tr>

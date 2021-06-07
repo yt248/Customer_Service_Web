@@ -116,7 +116,7 @@ public class CustomerController {
         model.addAttribute("customerDto", customerDto);
         model.addAttribute("addressDto", addressDto);
 
-        return "customer/customer-update";
+        return "customer/update-address-to-customer";
     }
 
 
@@ -129,7 +129,7 @@ public class CustomerController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("customerDto", customerDto);
-            return "customer/customer-update";
+            return "customer/update-address-to-customer";
         }
 
         customerService.updateAddressToCustomer(id, addressDto);
