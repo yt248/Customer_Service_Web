@@ -47,4 +47,6 @@ public interface CustomerService {
 
     public void updateAddressToCustomer(int customerId, AddressDto addressDto);
 
+    public void addAddressToCustomer(int customerId, AddressDto addressDto);
+
 }

@@ -13,32 +13,42 @@
         </tr>
         <tr>
             <td>Name:</td>
-            <td><form:input path="name"/></td>
+            <td>
+                <form:input path="name"/>
+                <form:errors cssStyle="color: brown" path="name"/>
+            </td>
+
         </tr>
         <tr>
             <td>Surname:</td>
-            <td><form:input path="surName"/></td>
+            <td>
+                <form:input path="surName"/>
+                <form:errors cssStyle="color: brown" path="surName"/>
+            </td>
         </tr>
         <tr>
             <td>Age:</td>
-            <td><form:input path="age"/></td>
-        </tr>
-        <tr>
-            <td>Address</td>
             <td>
+                <form:input path="age"/>
+                <form:errors cssStyle="color: brown" path="age"/>
+            </td>
         </tr>
         <tr>
-            <td>City Name:</td>
-            <td><input type="text" name="cityName" placeholder="Введите название города"/></td>
-        </tr>
-        <tr>
-            <td>Street Name:</td>
-            <td><input type="text" name="streetName" placeholder="Введите название улицы"/></td>
-        </tr>
-        <tr>
-            <td>House Number:</td>
-            <td><input type="text" name="houseNumber" placeholder="Введите номер дома"/></td>
-        </tr>
+<%--            <td>Address</td>--%>
+<%--            <td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>City Name:</td>--%>
+<%--            <td><input type="text" name="cityName" placeholder="Введите название города"/></td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>Street Name:</td>--%>
+<%--            <td><input type="text" name="streetName" placeholder="Введите название улицы"/></td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>House Number:</td>--%>
+<%--            <td><input type="text" name="houseNumber" placeholder="Введите номер дома"/></td>--%>
+<%--        </tr>--%>
         <tr>
             <td></td>
             <td><input type="submit" value="Create"></td>

@@ -2,7 +2,9 @@ package com.eugene.spring.boot.web.customer_service_web.service;
 
 import com.eugene.spring.boot.web.customer_service_web.dto.AddressDto;
 import com.eugene.spring.boot.web.customer_service_web.dto.CustomerDto;
+import com.eugene.spring.boot.web.customer_service_web.dto.mappers.AddressMapper;
 import com.eugene.spring.boot.web.customer_service_web.dto.mappers.CustomerMapper;
+import com.eugene.spring.boot.web.customer_service_web.entity.Address;
 import com.eugene.spring.boot.web.customer_service_web.entity.Customer;
 import com.eugene.spring.boot.web.customer_service_web.exceptions.CustomerByIdNotFoundException;
 import com.eugene.spring.boot.web.customer_service_web.repository.CustomerRepository;
@@ -72,6 +74,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public void updateAddressToCustomer(int customerId, AddressDto addressDto) {
         CustomerDto customerDto = CustomerMapper.toDto(getCustomerById(customerId));
 
@@ -80,14 +83,29 @@ public class CustomerServiceImpl implements CustomerService {
         updateAddress.setStreetName(addressDto.getStreetName());
         updateAddress.setHouseNumber(addressDto.getHouseNumber());
 
-        Integer idAddress = addressService.findByAddress(updateAddress.getCityName(),
+        Address address = addressService.findAddressByCityNameAndStreetNameAndHouseNumber(updateAddress.getCityName(),
                 updateAddress.getStreetName(), updateAddress.getHouseNumber());
 
 
-        if (idAddress != null) {
-            updateAddress.setId(idAddress);
+        if (address != null) {
+            updateAddress.setId(address.getId());
         }
         customerDto.setAddressDto(updateAddress);
+        createCustomer(customerDto);
+    }
+
+    @Override
+    @Transactional
+    public void addAddressToCustomer(int customerId, AddressDto addressDto) {
+        CustomerDto customerDto = CustomerMapper.toDto(getCustomerById(customerId));
+
+        Address address = addressService.findAddressByCityNameAndStreetNameAndHouseNumber(addressDto.getCityName(),
+                addressDto.getStreetName(), addressDto.getHouseNumber());
+
+        if (address != null) {
+            addressDto.setId(address.getId());
+        }
+        customerDto.setAddressDto(addressDto);
         createCustomer(customerDto);
 
     }

@@ -1,10 +1,15 @@
 package com.eugene.spring.boot.web.customer_service_web.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class AddressDto {
 
     private int id;
+    @NotEmpty(message = "CityName should not be empty")
     private String cityName;
+    @NotEmpty(message = "StreetName should not be empty")
     private String streetName;
+    @NotEmpty(message = "HouseNumber should not be empty")
     private String houseNumber;
 
     public AddressDto() {

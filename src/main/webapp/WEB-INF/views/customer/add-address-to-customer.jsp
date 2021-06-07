@@ -4,25 +4,13 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h2>Обновление адреса</h2>
-<form:form action="saveUpdateAddress" method="post" modelAttribute="addressDto">
+<h2>Добавление нового клиента</h2>
+<form:form action="saveAddressToCustomer" method="post" modelAttribute="addressDto">
     <table>
         <tr>
-            <td>Customer</td>
-            <td><input type="hidden" name="customerDtoId" value="${customerDto.id}"/></td>
+            <td><input type="hidden" name="id" value="${idCustomer}"/></td>
         </tr>
-        <tr>
-            <td>Name:</td>
-            <td>${customerDto.name}</td>
-        </tr>
-        <tr>
-            <td>Surname:</td>
-            <td>${customerDto.surName}</td>
-        </tr>
-        <tr>
-            <td>Age:</td>
-            <td>${customerDto.age}</td>
-        </tr>
+
         <tr>
             <td>Address</td>
         </tr>
@@ -49,7 +37,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Update"></td>
+            <td><input type="submit" value="Add"></td>
         </tr>
 
     </table>

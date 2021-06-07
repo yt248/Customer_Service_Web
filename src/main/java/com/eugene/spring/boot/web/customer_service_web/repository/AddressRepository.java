@@ -12,7 +12,7 @@ public interface AddressRepository extends JpaRepository<Address, Integer> {
 
     @Query("select a.id from Address a where a.cityName = :cityName and a.streetName = :streetName and " +
             "a.houseNumber = :houseNumber")
-    int findByAddress(@Param("cityName") String cityName,
+    Integer findByAddress(@Param("cityName") String cityName,
                           @Param("streetName") String streetName,
                           @Param("houseNumber") String houseNumber);
 

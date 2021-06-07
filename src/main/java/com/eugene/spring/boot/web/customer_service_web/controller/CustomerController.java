@@ -9,8 +9,10 @@ import com.eugene.spring.boot.web.customer_service_web.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +49,7 @@ public class CustomerController {
         return "customer/customer-index";
     }
 
+
     //-----------------------------Создание клиента с использованием ДТО ----------------------
 
     @GetMapping("/create")
@@ -56,23 +59,48 @@ public class CustomerController {
     }
 
     @PostMapping("/saveCustomer")
-    public String saveCustomer(@ModelAttribute("customerDto") CustomerDto customerDto,
-                               @RequestParam("cityName") String cityName,
-                               @RequestParam("streetName") String streetName,
-                               @RequestParam("houseNumber") String houseNumber) {
+    public String saveCustomer(@Valid @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult) {
 
-        AddressDto addressDto = new AddressDto();
-        addressDto.setCityName(cityName);
-        addressDto.setStreetName(streetName);
-        addressDto.setHouseNumber(houseNumber);
-
-        customerDto.setAddressDto(addressDto);
+        if (bindingResult.hasErrors()) {
+            return "customer/customer-add";
+        }
 
         customerService.createCustomer(customerDto);
         return "redirect:/customers/";
+
+
     }
 
+    //-----------------------------Добавление адреса клиенту ----------------------
+//    @GetMapping("/addAddressToCustomer/{id}")
+    @GetMapping("/addAddressToCustomer")
+    public String addAddressToCustomer(@RequestParam int id, Model model) {
+//    public String addAddressToCustomer(@PathVariable int id, Model model) {
+        model.addAttribute("idCustomer", id);
+        model.addAttribute("addressDto", new AddressDto());
+
+        return "customer/add-address-to-customer";
+    }
+
+    //    @PostMapping("/saveAddressToCustomer")
+    @PostMapping("/addAddressToCustomer/saveAddressToCustomer")
+    public String saveAddressToCustomer(@RequestParam("id") int idCustomer,
+                                        @Valid @ModelAttribute AddressDto addressDto, BindingResult bindingResult,
+                                        Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("idCustomer", idCustomer);
+            return "customer/add-address-to-customer";
+        }
+        customerService.addAddressToCustomer(idCustomer, addressDto);
+
+        return "redirect:/customers/";
+
+
+    }
+
+
     //-----------------------------Удаление клиента ----------------------
+
     @GetMapping(value = "/delete/")
     public String deleteCustomerById(@RequestParam int id) {
         customerService.deleteCustomer(id);
@@ -95,7 +123,14 @@ public class CustomerController {
     //    @PostMapping("/saveUpdateAddress")
     @PostMapping("/updateAddressToCustomer/saveUpdateAddress")
     public String saveUpdateAddress(@RequestParam("customerDtoId") int id,
-                                    @ModelAttribute("addressDto") AddressDto addressDto) {
+                                    @Valid @ModelAttribute("addressDto") AddressDto addressDto,
+                                    BindingResult bindingResult, Model model) {
+        CustomerDto customerDto = CustomerMapper.toDto(customerService.getCustomerById(id));
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("customerDto", customerDto);
+            return "customer/customer-update";
+        }
 
         customerService.updateAddressToCustomer(id, addressDto);
 

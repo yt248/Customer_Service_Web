@@ -1,10 +1,18 @@
 package com.eugene.spring.boot.web.customer_service_web.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class CustomerDto {
 
     private int id;
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 2, message = "name must be min 2 symbols")
     private String name;
+    @NotEmpty(message = "Surname should not be empty")
     private String surName;
+    @Min(value = 1, message = "Age should be greater than 1")
     private int age;
 
     private AddressDto addressDto;

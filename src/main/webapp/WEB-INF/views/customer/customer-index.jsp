@@ -22,8 +22,9 @@
             <td>Фамилия:</td>
             <td>Возраст:</td>
             <td>Адрес:</td>
+            <td>Добавить адрес:</td>
             <td>Изменить адрес:</td>
-            <td>Удалить:</td>
+            <td>Удалить клиента:</td>
         </tr>
         <c:forEach var="customer" items="${customerDtoList}">
 
@@ -35,12 +36,21 @@
                 <c:param name="id" value="${customer.id}"/>
             </c:url>
 
+            <c:url value="/customers/addAddressToCustomer/" var="addURL">
+                <c:param name="id" value="${customer.id}"/>
+            </c:url>
+
             <tr>
                 <td>${customer.name}</td>
                 <td>${customer.surName}</td>
                 <td>${customer.age}</td>
-                <td>${customer.addressDto.cityName}  ${customer.addressDto.streetName} ${customer.addressDto.houseNumber}</td>
-                <td><a href="${updateURL}">Update address</a></td>
+                <td>${customer.addressDto.cityName} ${customer.addressDto.streetName} ${customer.addressDto.houseNumber}</td>
+                <td><a href="${addURL}">Add address</a></td>
+                <td>
+                    <c:if test="${customer.addressDto != null}">
+                        <a href="${updateURL}">Update address</a>
+                    </c:if>
+                </td>
                 <td><a href="${deleteURL}">Delete</a></td>
             </tr>
         </c:forEach>
