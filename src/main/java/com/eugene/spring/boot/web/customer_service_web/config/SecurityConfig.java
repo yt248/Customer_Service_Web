@@ -18,17 +18,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password("admin")
-                .roles("ADMIN")
+                .authorities("SEARCH_PRIVILEGES", "UPDATE_PRIVILEGES", "ROLE_ADMIN")
+//                .roles("ADMIN")
                 .and()
                 .withUser("user")
                 .password("user")
-                .roles("USER");
+//                .roles("USER")
+                .authorities("UPDATE_PRIVILEGES", "ROLE_USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/customers/", "/customers/updateAddressToCustomer/**").hasAnyRole("USER", "ADMIN")
+//                .antMatchers("/customers/", "/customers/updateAddressToCustomer/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/customers/").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/customers/updateAddressToCustomer/**").hasAuthority("UPDATE_PRIVILEGES")
+                .antMatchers("/customers/search").hasAuthority("SEARCH_PRIVILEGES")
                 .antMatchers("/customers/**").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
                 .and()

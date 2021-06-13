@@ -7,9 +7,7 @@
     <br>
     <br>
     <a href="/customers/">Go Customer</a>
-    <br>
-    <br>
-    <a href="/addresses/">Go Address</a>
+
 
 
 </body>
